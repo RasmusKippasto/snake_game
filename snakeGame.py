@@ -72,7 +72,6 @@ def newFood():
     for index in snake:
       if(index == food):
         fedSnake = False
-  print(food)
 
 
 def gameOver():
