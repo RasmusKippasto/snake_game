@@ -31,13 +31,13 @@ def button_pressed(gpio):
 
 
 gpio.setup(8,gpio.IN,pull_up_down=gpio.PUD_DOWN)
-gpio.add_event_detect(10, gpio.RISING, callback=button_pressed)
+gpio.add_event_detect(8, gpio.RISING, callback=button_pressed)
 gpio.setup(10,gpio.IN,pull_up_down=gpio.PUD_DOWN)
 gpio.add_event_detect(10, gpio.RISING, callback=button_pressed)
 gpio.setup(12,gpio.IN,pull_up_down=gpio.PUD_DOWN)
-gpio.add_event_detect(10, gpio.RISING, callback=button_pressed)
+gpio.add_event_detect(12, gpio.RISING, callback=button_pressed)
 gpio.setup(16, gpio.IN,pull_up_down=gpio.PUD_DOWN)
-gpio.add_event_detect(10, gpio.RISING, callback=button_pressed)
+gpio.add_event_detect(16, gpio.RISING, callback=button_pressed)
 
 
 def LED_PARTY():
