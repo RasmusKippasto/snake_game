@@ -20,14 +20,26 @@ device = max7219(serial, height=8, width=8)
 
 def button_pressed(gpio):
   global direction
-  if(gpio == 8 and direction != [0,-1]):   #DOWN
-   direction = [1,0]
-  elif(gpio == 10 and direction != [1,0]): #UP
-   direction = [0,-1]
-  elif(gpio == 12 and direction != [-1,0]): #LEFT
-   direction = [0,1]
-  elif(gpio == 16 and direction != [0,1]): #RIGHT
-   direction = [-1,0]
+  if(gpio == 8):                           #RIGHT [1,0](8)
+    if(len(snake) == 1 or direction != [-1,0]:
+       direction = [1,0]
+    else:
+       direction = [-1,0]
+  elif(gpio == 10):                        #DOWN [0,-1](10)
+    if(len(snake) == 1 or direction != [0,1]:
+       direction = [0,-1]
+    else:
+       direction = [0,1]
+  elif(gpio == 12):                        #UP [0,1](12)
+    if(len(snake) == 1 or direction != [0,-1]:
+       direction = [0,1]
+    else:
+       direction = [0,-1]
+  elif(gpio == 16):                        #LEFT [-1,0](16)
+    if(len(snake) == 1 or direction != [1,0]:
+       direction = [-1,0]
+    else:
+       direction = [1,0]
 
 
 gpio.setup(8,gpio.IN,pull_up_down=gpio.PUD_DOWN)
@@ -108,9 +120,9 @@ while True:
        draw.point(i, fill ="white")
   if(pause == False):
     newLength = (len(snake)-2)*0.05
-      if(newLenghth < 0.2):
+      if(newLenghth < 0.35):
         time.sleep(0.5-newLength)
       else:
-        time.sleep(0.3)
+        time.sleep(0.15)
   else:
     time.sleep(0.4)
