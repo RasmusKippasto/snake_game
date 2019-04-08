@@ -20,13 +20,13 @@ device = max7219(serial, height=8, width=8)
 
 def button_pressed(gpio):
   global direction
-  if(gpio == 8):   #DOWN
+  if(gpio == 8 and direction != [0,-1]):   #DOWN
    direction = [1,0]
-  elif(gpio == 10): #UP
+  elif(gpio == 10 and direction != [1,0]): #UP
    direction = [0,-1]
-  elif(gpio == 12: #LEFT
+  elif(gpio == 12 and direction != [-1,0]): #LEFT
    direction = [0,1]
-  elif(gpio == 16 #RIGHT
+  elif(gpio == 16 and direction != [0,1]): #RIGHT
    direction = [-1,0]
 
 
@@ -42,7 +42,7 @@ gpio.add_event_detect(16, gpio.RISING, callback=button_pressed)
 
 def LED_PARTY():
     counter = 0
-    while counter > 20:
+    while counter > 25:
         with canvas(device) as draw:
             for i in range(4):
                 x = random.randint(0, device.width)
@@ -57,7 +57,7 @@ def gameStart():
   snake = [[4,4]]
   direction = [0,0]
   while direction == [0,0]:
-    show_message(device, "START", fill="white", scroll_delay=0.1)
+    show_message(device, "START", fill="white", scroll_delay=0.06)
   newFood()
 
 
@@ -77,7 +77,7 @@ def newFood():
 def gameOver():
   LED_PARTY()
   points = len(snake)-1
-  show_message(device,"SCORE: "+ str(points), fill="white", scroll_delay=0.1)
+  show_message(device,"SCORE: "+ str(points), fill="white", scroll_delay=0.06)
   gameStart()
 
 
@@ -96,8 +96,7 @@ while True:
   else:
      snake.pop()
   snake.insert(0,newSnake)
-  if(snake[0][0] > width or snake [0][1] > height
-    or snake[0][0] < 0 or snake[0][1] < 0 ):
+  if(snake[0][0] > width or snake [0][1] > height or snake[0][0] < 0 or snake[0][1] < 0 ):
     gameOver()
     pass
   device.clear()
