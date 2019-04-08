@@ -109,6 +109,9 @@ while True:
        draw.point(i, fill ="white")
   if(pause == False):
     newLength = (len(snake)-2)*0.05
-    time.sleep(0.5-newLength)
+      if(newLenghth < 0.2):
+        time.sleep(0.5-newLength)
+      else:
+        time.sleep(0.3)
   else:
     time.sleep(0.4)
